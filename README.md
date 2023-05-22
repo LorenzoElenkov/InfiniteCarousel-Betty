@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+#   Infinite Image Carousel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##  Purpose
+This exercise was given to me as a hometask for a frontend position. I was given the task on 22nd May, 2023.
+While I had been given a full week to complete the task, I really focused and managed to finish it in the same day.
 
-## Available Scripts
+##  Requirements
+Create an infinite image carousel (the items loop when the end is reached) using React.
+Navigation inside the carousel should only be triggered by scroll, rather than arrows or buttons.
 
-In the project directory, you can run:
+The component must:
+1.  Work with images of different sizes and aspect ratios
+2.  Work on devices with different screen sizes
+3.  Work on both mobile and desktop
+4.  Work equally well with a dozen of images, as well as 1000+ images
+5.  Be reusable
 
-### `npm start`
+##  Solution
+I decided that I am going to focus on 4th requirement point, where performance is of upmost importance. Regardless of the amount of images, the carousel should perform equally well.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Therefore, I decided that I have to think of a way to only show a small number of the images in the carousel at a time.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+That is how I came up with the following solution:
+1.  Show the current image on screen
+2.  Have the previous image ready to the left of the current one
+3.  Have the next image ready to the right of the current one
+4.  Any other image that is not previous, current or next should not be rendered.
 
-### `npm test`
+I used a combination of snapping technique in CSS + flexbox to make sure that images are always centered when viewing them, thus making sure that no states in between will be seen.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Every time, the user scrolls either to the left or right, a new calculation is made and the new previous, current and next images are rendered, while making sure that the scroll coordinates of the container are in the middle.
 
-### `npm run build`
+##  Accessibility
+The image carousel has a height of 50% of the small viewport height. It is important that I used (svh) here instead of (vh), because mobile phones and tablets tend to have a bar either on top or bottom that is not taken into consideration in vh units. The usage of SVH takes into account the bar, which ensures that it will be exactly half of the vertical viewport.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+By using the dynamic unit SVH, I eliminated the need to use media queries.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Therefore, the image carousel is responsive across all kinds of devices.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+##  Accountability
+I started working on the hometask at 11.30AM (10 minutes after the intro interview) and finished at 6.00PM. I had a few breaks but all in all, it took me around 4 hours to complete the task.
