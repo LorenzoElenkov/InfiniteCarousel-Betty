@@ -1,10 +1,12 @@
 #   Infinite Image Carousel
+![ezgif com-video-to-gif](https://github.com/LorenzoElenkov/InfiniteCarousel-Betty/assets/95830881/deb4a625-2fbb-4933-a607-78f9c77e9451)
 
 ##  Purpose
 This exercise was given to me as a hometask for a frontend position. I was given the task on 22nd May, 2023.
 While I had been given a full week to complete the task, I really focused and managed to finish it in the same day.
 
-##  Requirements
+##  Requirements!
+
 Create an infinite image carousel (the items loop when the end is reached) using React.
 Navigation inside the carousel should only be triggered by scroll, rather than arrows or buttons.
 
