@@ -31,10 +31,6 @@ const Carousel: React.FC<ICarousel> = ({ images }) => {
   }, [currentImageIndex]);
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
-    console.log(
-      Math.floor(e.currentTarget.scrollLeft) >=
-        e.currentTarget.scrollWidth - e.currentTarget.clientWidth
-    );
     if (e.currentTarget.scrollLeft <= 0) {
       return setCurrentImageIndex((prevState) => {
         if (prevState - 1 < 0) return images.length - 1;
@@ -44,6 +40,12 @@ const Carousel: React.FC<ICarousel> = ({ images }) => {
     if (
       Math.floor(e.currentTarget.scrollLeft) >=
       e.currentTarget.scrollWidth - e.currentTarget.clientWidth
+      /* Instead of checking if scrollLeft is bigger or equal to
+        e.currentTarget.clientWidth * 2 + ONE_REM_POINT * 2
+        i check if current scroll is to the most right
+        because scrollWidth is basically 3 times clientWidth
+        because 1 clientWidth is one image
+      */
     ) {
       return setCurrentImageIndex((prevState) => {
         if (prevState + 1 > images.length - 1) return 0;
