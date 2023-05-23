@@ -4,6 +4,7 @@ import CarouselContainer from "./CarouselContainer";
 
 interface ICarousel {
   images: string[];
+  autoloop?: true;
 }
 
 const getAdjacentIndexes = (currentIndex: number, maxIndex: number) => {
@@ -16,7 +17,7 @@ const getAdjacentIndexes = (currentIndex: number, maxIndex: number) => {
   return nextPrevIndexArray;
 };
 
-const Carousel: React.FC<ICarousel> = ({ images }) => {
+const Carousel: React.FC<ICarousel> = ({ images, autoloop }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [prevIndex, nextIndex] = getAdjacentIndexes(
     currentImageIndex,
@@ -28,6 +29,19 @@ const Carousel: React.FC<ICarousel> = ({ images }) => {
   useEffect(() => {
     if (!carouselRef.current) return;
     carouselRef.current.scrollLeft = carouselRef.current.clientWidth;
+  }, [currentImageIndex]);
+
+  useEffect(() => {
+    if (autoloop) {
+      const loop = setTimeout(() => {
+        if (!carouselRef.current) return;
+        carouselRef.current.scroll({
+          left: carouselRef.current.clientWidth * 2,
+          behavior: "smooth",
+        });
+      }, 3000);
+      return () => clearTimeout(loop);
+    }
   }, [currentImageIndex]);
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
