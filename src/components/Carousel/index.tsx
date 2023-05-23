@@ -6,8 +6,6 @@ interface ICarousel {
   images: string[];
 }
 
-const ONE_REM_UNIT = 16;
-
 const getAdjacentIndexes = (currentIndex: number, maxIndex: number) => {
   const nextPrevIndexArray: [number, number] = [
     currentIndex - 1,
@@ -33,6 +31,10 @@ const Carousel: React.FC<ICarousel> = ({ images }) => {
   }, [currentImageIndex]);
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
+    console.log(
+      Math.floor(e.currentTarget.scrollLeft) >=
+        e.currentTarget.scrollWidth - e.currentTarget.clientWidth
+    );
     if (e.currentTarget.scrollLeft <= 0) {
       return setCurrentImageIndex((prevState) => {
         if (prevState - 1 < 0) return images.length - 1;
@@ -41,7 +43,7 @@ const Carousel: React.FC<ICarousel> = ({ images }) => {
     }
     if (
       Math.floor(e.currentTarget.scrollLeft) >=
-      e.currentTarget.clientWidth * 2 + ONE_REM_UNIT * 2
+      e.currentTarget.scrollWidth - e.currentTarget.clientWidth
     ) {
       return setCurrentImageIndex((prevState) => {
         if (prevState + 1 > images.length - 1) return 0;
