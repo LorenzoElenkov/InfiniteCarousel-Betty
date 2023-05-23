@@ -31,7 +31,7 @@ I used a combination of snapping technique in CSS + flexbox to make sure that im
 
 Every time, the user scrolls either to the left or right, a new calculation is made and the new previous, current and next images are rendered, while making sure that the scroll coordinates of the container are in the middle.
 
-##  Accessibility
+##  Responsiveness
 The image carousel has a height of 50% of the small viewport height. It is important that I used (svh) here instead of (vh), because mobile phones and tablets tend to have a bar either on top or bottom that is not taken into consideration in vh units. The usage of SVH takes into account the bar, which ensures that it will be exactly half of the vertical viewport.
 
 By using the dynamic unit SVH, I eliminated the need to use media queries.
@@ -40,3 +40,8 @@ Therefore, the image carousel is responsive across all kinds of devices.
 
 ##  Accountability
 I started working on the hometask at 11.30AM (10 minutes after the intro interview) and finished at 6.00PM. I had a few breaks but all in all, it took me around 4 hours to complete the task.
+
+## Changelog
+1.  Made a new branch [tp001-improvement](https://github.com/LorenzoElenkov/InfiniteCarousel-Betty/tree/tp001-improvement), where I have made a better and decoupled logic for when the image carousel is hitting the right border.
+    1.  In master branch, the Carousel component had a logic to detect if image carousel hits the most right point of the carousel based on CarouselItem width + the gap size that is set by CSS of the container. I used a constant variable called ONE_REM_POINT which was declared as 16 but this REM unit can be different for different users depending on their settings. Therefore, it would work most of the time correctly but not for users who have tweaked their relative unit.
+    2.  In tp001-improvement branch, I have made a more robust and accurate calculation by taking the whole container width (inclusive of gaps between image items) and subtracting one image item (which is considered the viewport of the container). This way it will be responsive no matter what settings the user has regarding the relative units (REM).
